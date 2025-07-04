@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Menu - U-Kitchen</title>
+    <meta name="keywords" content="restaurant, menu, food, beverages, order online, ice cream, coffee">
+    <meta name="description" content="Explore our delicious menu of food and beverages. Order online for a seamless experience.">
+    <meta name="author" content="GACOR Group | U-Kitchen">
+    <title>Menu</title>
+    <link rel="shortcut icon" href="https://img.icons8.com/?size=100&id=25288&format=png&color=000000" type="image">
+    <!-- Bootstrap 5.3.6 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome 4.0.3 -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="css/style2.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.css">
+    <!-- Favicon -->
+    <link rel="icon" href="images/fevicon.png" type="image/gif"/>
+</head>
+<body>
+
+    <!-- Header Section Start -->
+    <div class="header_section header_bg">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="index.html"><img src="new_images/logo.png" alt="Logo"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="optimalisasi.html">Menu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="services.html">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="testimonial.html">Testimonial</a>
+                        </li>
+                    </ul>
+
+                    <div class="d-flex align-items-center ms-lg-auto me-3">
+                        <form class="d-flex me-3" onsubmit="event.preventDefault();">
+                            <div class="input-group position-relative">
+                                <span class="input-group-text bg-white border-end-0"><i class="fa fa-search"></i></span>
+                                <input class="form-control form-control-sm search-input border-start-0" id="searchInput" placeholder="Search..." aria-label="Search" onkeyup="filterMenu()">
+                                <button class="btn btn-outline-secondary btn-sm position-absolute end-0 top-50 translate-middle-y" type="button" onclick="clearSearch()" style="z-index: 1; border: none; background: transparent;">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </form>
+
+                        <button class="btn btn-outline-primary me-3 position-relative cart-button" onclick="showCart()">
+                            <i class="fa fa-shopping-cart"></i> Cart
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count">0</span>
+                        </button>
+                        <a href="login.html" class="btn btn-outline-secondary login-button">
+                            <i class="fa fa-user me-1" aria-hidden="true"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Header Section End -->
+
+    <!-- Modern Sidebar -->
+    <div id="modernSidebar" class="modern-sidebar bg-dark text-white">
+        <div class="sidebar-header p-4 border-bottom border-secondary">
+            <h3 class="sidebar-title mb-2 fs-4 fw-bold">Menu Categories</h3>
+            <p class="sidebar-subtitle text-muted mb-0">Browse our delicious offerings</p>
+            <button class="sidebar-close btn btn-sm btn-outline-light position-absolute top-0 end-0 m-3" onclick="toggleSidebar()">
+                <i class="fa fa-times"></i>
+            </button>
+        </div>
+
+        <div class="sidebar-menu p-4">
+            <!-- Search & Filter Section -->
+            <div class="menu-section mb-4">
+                <h6 class="menu-section-title text-uppercase fw-bold mb-3 text-primary">Search & Filter</h6>
+                <div class="search-box">
+                    <div class="input-group">
+                        <input type="text" class="form-control form-control-sm bg-dark text-white border-secondary" id="sidebarSearch" placeholder="Search menu..." onkeyup="filterMenuFromSidebar()">
+                        <button class="btn btn-outline-secondary btn-sm" type="button" onclick="clearSidebarSearch()">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Categories Section -->
+            <div class="menu-section mb-4">
+                <h6 class="menu-section-title text-uppercase fw-bold mb-3 text-primary">Categories</h6>
+                <div class="menu-items">
+                    <a href="#kategori-makanan" class="menu-item d-block py-2 px-3 mb-2 rounded text-white text-decoration-none" onclick="scrollToSection('kategori-makanan')">
+                        <i class="fa fa-cutlery me-2"></i>Food Items
+                    </a>
+                    <a href="#kategori-minuman" class="menu-item d-block py-2 px-3 mb-2 rounded text-white text-decoration-none" onclick="scrollToSection('kategori-minuman')">
+                        <i class="fa fa-glass me-2"></i>Beverages
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Actions Section -->
+            <div class="menu-section">
+                <h6 class="menu-section-title text-uppercase fw-bold mb-3 text-primary">Quick Actions</h6>
+                <div class="menu-items">
+                    <a href="#" class="menu-item d-block py-2 px-3 mb-2 rounded text-white text-decoration-none" onclick="showCart()">
+                        <i class="fa fa-shopping-cart me-2"></i>View Cart
+                    </a>
+                    <a href="login.html" class="menu-item d-block py-2 px-3 rounded text-white text-decoration-none">
+                        <i class="fa fa-user me-2"></i>Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Overlay -->
+    <div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
+
+    <!-- Sidebar Toggle Button -->
+    <button id="sidebarToggle" class="sidebar-toggle" onclick="toggleSidebar()">
+        <i class="fa fa-bars"></i>
+    </button>
+
+    <!-- Main Content -->
+    <div id="mainContent" class="main-content">
+        <!-- Food Section -->
+        <div class="cream_section layout_padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="cream_taital" id="kategori-makanan">Food</h1>
+                        <p class="cream_text">Selection of different kinds of cuisines</p>
+                    </div>
+                </div>
+                <div class="cream_section_2">
+                    <div class="row g-4" id="food-items-container">
+                        <!-- Food Item 1 -->
+                        <div class="col-md-4 col-sm-6 menu-item-col">
+                            <div class="cream_box menu-item position-relative">
+                                <div class="best-seller-badge">Best Seller</div>
+                                <div class="cream_img"><img src="new_images/nasiayam.png" alt="Nasi Campur Ayam"></div>
+                                <div class="item-details">
+                                    <h6 class="strawberry_text">Nasi Campur Ayam</h6>
+                                    <div class="d-flex flex-column align-items-end mt-3 px-2">
+                                        <div class="price-text mb-2">
+                                            <span class="text-muted small">Price:</span>
+                                            <span class="d-block fs-4 fw-bold text-primary">20.000</span>
+                                        </div>
+                                        <div class="cart_bt">
+                                            <a href="#" class="add-to-cart" data-name="Nasi Campur Ayam" data-price="20.000">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Food Item 2 -->
+                        <div class="col-md-4 col-sm-6 menu-item-col">
+                            <div class="cream_box menu-item">
+                                <div class="cream_img"><img src="new_images/nasiikan.png" alt="Nasi Campur Ikan"></div>
+                                <div class="item-details">
+                                    <h6 class="strawberry_text">Nasi Campur Ikan</h6>
+                                    <div class="d-flex flex-column align-items-end mt-3 px-2">
+                                        <div class="price-text mb-2">
+                                            <span class="text-muted small">Price:</span>
+                                            <span class="d-block fs-4 fw-bold text-primary">15.000</span>
+                                        </div>
+                                        <div class="cart_bt">
+                                            <a href="#" class="add-to-cart" data-name="Nasi Campur Ikan" data-price="15.000">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Food Item 3 -->
+                        <div class="col-md-4 col-sm-6 menu-item-col">
+                            <div class="cream_box menu-item">
+                                <div class="cream_img"><img src="https://asset.kompas.com/crops/GZP1r3C5qNg_J8bgVzQtupnPoBs=/81x22:892x563/1200x800/data/photo/2020/05/13/5ebbdec618a37.jpg" alt="Miedal"></div>
+                                <div class="item-details">
+                                    <h6 class="strawberry_text">Miedal</h6>
+                                    <div class="d-flex flex-column align-items-end mt-3 px-2">
+                                        <div class="price-text mb-2">
+                                            <span class="text-muted small">Price:</span>
+                                            <span class="d-block fs-4 fw-bold text-primary">15.000</span>
+                                        </div>
+                                        <div class="cart_bt">
+                                            <a href="#" class="add-to-cart" data-name="Miedal" data-price="15.000">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Food Item 4 -->
+                        <div class="col-md-4 col-sm-6 menu-item-col">
+                            <div class="cream_box menu-item">
+                                <div class="cream_img"><img src="https://cdn.timesmedia.co.id/images/2022/01/08/Mie-Cakalang.jpg" alt="Mie Cakalang"></div>
+                                <div class="item-details">
+                                    <h6 class="strawberry_text">Mie Cakalang</h6>
+                                    <div class="d-flex flex-column align-items-end mt-3 px-2">
+                                        <div class="price-text mb-2">
+                                            <span class="text-muted small">Price:</span>
+                                            <span class="d-block fs-4 fw-bold text-primary">15.000</span>
+                                        </div>
+                                        <div class="cart_bt">
+                                            <a href="#" class="add-to-cart" data-name="Mie Cakalang" data-price="15.000">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Food Item 5 -->
+                        <div class="col-md-4 col-sm-6 menu-item-col">
+                            <div class="cream_box menu-item">
+                                <div class="cream_img"><img src="https://akcdn.detik.net.id/community/media/visual/2023/02/19/pisang-goreng_169.jpeg?w=700&q=90" alt="Pisang Goreng Capatu"></div>
+                                <div class="item-details">
+                                    <h6 class="strawberry_text">Pisang Goreng Capatu</h6>
+                                    <div class="d-flex flex-column align-items-end mt-3 px-2">
+                                        <div class="price-text mb-2">
+                                            <span class="text-muted small">Price:</span>
+                                            <span class="d-block fs-4 fw-bold text-primary">10.000</span>
+                                        </div>
+                                        <div class="cart_bt">
+                                            <a href="#" class="add-to-cart" data-name="Pisang Goreng Capatu" data-price="10.000">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Food Item 6 -->
+                        <div class="col-md-4 col-sm-6 menu-item-col">
+                            <div class="cream_box menu-item">
+                                <div class="cream_img"><img src="https://media.istockphoto.com/id/1443091667/id/foto/stik-pisang-renyah-camilan-buah.jpg?s=1024x1024&w=is&k=20&c=Y2CH10Uy0E1lz7qAZS7__MROQ6x2WQ0BqHA8LpJj_Kg=" alt="Pisang Stik"></div>
+                                <div class="item-details">
+                                    <h6 class="strawberry_text">Pisang Stik</h6>
+                                    <div class="d-flex flex-column align-items-end mt-3 px-2">
+                                        <div class="price-text mb-2">
+                                            <span class="text-muted small">Price:</span>
+                                            <span class="d-block fs-4 fw-bold text-primary">10.000</span>
+                                        </div>
+                                        <div class="cart_bt">
+                                            <a href="#" class="add-to-cart" data-name="Pisang Stik" data-price="10.000">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Food Item 7 -->
+                        <div class="col-md-4 col-sm-6 menu-item-col">
+                            <div class="cream_box menu-item">
+                                <div class="cream_img"><img src="https://cdn0-production-images-kly.akamaized.net/gax1h4XejYB8CiVR-V05tPraheU=/680x383/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/4281785/original/003405600_1672849832-shutterstock_2132515083.jpg" alt="Tahu Isi"></div>
+                                <div class="item-details">
+                                    <h6 class="strawberry_text">Tahu Isi</h6>
+                                    <div class="d-flex flex-column align-items-end mt-3 px-2">
+                                        <div class="price-text mb-2">
+                                            <span class="text-muted small">Price:</span>
+                                            <span class="d-block fs-4 fw-bold text-primary">3.000<br>/pcs</span>
+                                        </div>
+                                        <div class="cart_bt">
+                                            <a href="#" class="add-to-cart" data-name="Tahu Isi" data-price="3.000">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Food Item 8 -->
+                        <div class="col-md-4 col-sm-6 menu-item-col">
+                            <div class="cream_box menu-item">
+                                <div class="cream_img"><img src="https://www.dapurkobe.co.id/wp-content/uploads/tempe-goreng-kriuk-ala-tepung-kobe.jpg" alt="Tempe Goreng Tepung"></div>
+                                <div class="item-details">
+                                    <h6 class="strawberry_text">Tempe Goreng Tepung</h6>
+                                    <div class="d-flex flex-column align-items-end mt-3 px-2">
+                                        <div class="price-text mb-2">
+                                            <span class="text-muted small">Price:</span>
+                                            <span class="d-block fs-4 fw-bold text-primary">3.000</span>
+                                        </div>
+                                        <div class="cart_bt">
+                                            <a href="#" class="add-to-cart" data-name="Tempe Goreng Tepung" data-price="3.000">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Food Item 9 -->
+                        <div class="col-md-4 col-sm-6 menu-item-col">
+                            <div class="cream_box menu-item">
+                                <div class="cream_img"><img src="https://www.dapurkobe.co.id/wp-content/uploads/nasi-telur-sentosa.jpg" alt="Nasi Telur Apong Double"></div>
+                                <div class="item-details">
+                                    <h6 class="strawberry_text">Nasi Telur Apong Double</h6>
+                                    <div class="d-flex flex-column align-items-end mt-3 px-2">
+                                        <div class="price-text mb-2">
+                                            <span class="text-muted small">Price:</span>
+                                            <span class="d-block fs-4 fw-bold text-primary">10.000</span>
+                                        </div>
+                                        <div class="cart_bt">
+                                            <a href="#" class="add-to-cart" data-name="Nasi Telur Apong Double" data-price="10.000">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                         <!-- Food Item 10 -->
+                        <div class="col-md-4 col-sm-6 menu-item-col">
+                            <div class="cream_box menu-item">
+                                <div class="cream_img"><img src="new_images/miesingle.png" alt="Mie Single"></div>
+                                <div class="item-details">
+                                    <h6 class="strawberry_text">Mie Single</h6>
+                                    <div class="d-flex flex-column align-items-end mt-3 px-2">
+                                        <div class="price-text mb-2">
+                                            <span class="text-muted small">Price:</span>
+                                            <span class="d-block fs-4 fw-bold text-primary">10.000</span>
+                                        </div>
+                                        <div class="cart_bt">
+                                            <a href="#" class="add-to-cart" data-name="Mie Single" data-price="10.000">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                         <!-- Food Item 11 -->
+                        <div class="col-md-4 col-sm-6 menu-item-col">
+                            <div class="cream_box menu-item">
+                                <div class="cream_img"><img src="new_images/miedouble.png" alt="Mie Double"></div>
+                                <div class="item-details">
+                                    <h6 class="strawberry_text">Mie Double</h6>
+                                    <div class="d-flex flex-column align-items-end mt-3 px-2">
+                                        <div class="price-text mb-2">
+                                            <span class="text-muted small">Price:</span>
+                                            <span class="d-block fs-4 fw-bold text-primary">10.000</span>
+                                        </div>
+                                        <div class="cart_bt">
+                                            <a href="#" class="add-to-cart" data-name="Mie Double" data-price="10.000">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Food Item 12 -->
+                        <div class="col-md-4 col-sm-6 menu-item-col">
+                            <div class="cream_box menu-item">
+                                <div class="cream_img"><img src="https://hypeabis.id/assets/content/202407111139181720672758_crop.jpg" alt="Nasi Telur Apong Single"></div>
+                                <div class="item-details">
+                                    <h6 class="strawberry_text">Nasi Telur Apong Single</h6>
+                                    <div class="d-flex flex-column align-items-end mt-3 px-2">
+                                        <div class="price-text mb-2">
+                                            <span class="text-muted small">Price:</span>
+                                            <span class="d-block fs-4 fw-bold text-primary">10.000</span>
+                                        </div>
+                                        <div class="cart_bt">
+                                            <a href="#" class="add-to-cart" data-name="Nasi Telur Apong Single" data-price="10.000">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Beverage Section -->
+        <div class="cream_section layout_padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="cream_taital" id="kategori-minuman">Beverages</h1>
+                        <p class="cream_text">Drinks & Desserts to freshen up your day.</p>
+                    </div>
+                </div>
+                <div class="cream_section_2">
+                    <div class="row g-4" id="beverage-items-container">
+                        <!-- Beverage Item 1 -->
+                        <div class="col-md-4 col-sm-6 menu-item-col">
+                            <div class="cream_box menu-item">
+                                <div class="cream_img"><img src="new_images/air.png" alt="Air Mineral"></div>
+                                <div class="item-details">
+                                    <h6 class="strawberry_text">Air Mineral</h6>
+                                    <div class="d-flex flex-column align-items-end mt-3 px-2">
+                                        <div class="price-text mb-2">
+                                            <span class="text-muted small">Price:</span>
+                                            <span class="d-block fs-4 fw-bold text-primary">5.000</span>
+                                        </div>
+                                        <div class="cart_bt">
+                                            <a href="#" class="add-to-cart" data-name="Air Mineral" data-price="5.000">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Beverage Item 2 -->
+                        <div class="col-md-4 col-sm-6 menu-item-col">
+                            <div class="cream_box menu-item">
+                                <div class="cream_img"><img src="new_images/floridina.png" alt="Floridina"></div>
+                                <div class="item-details">
+                                    <h6 class="strawberry_text">Floridina</h6>
+                                    <div class="d-flex flex-column align-items-end mt-3 px-2">
+                                        <div class="price-text mb-2">
+                                            <span class="text-muted small">Price:</span>
+                                            <span class="d-block fs-4 fw-bold text-primary">5.000</span>
+                                        </div>
+                                        <div class="cart_bt">
+                                            <a href="#" class="add-to-cart" data-name="Floridina" data-price="5.000">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Beverage Item 3 -->
+                        <div class="col-md-4 col-sm-6 menu-item-col">
+                            <div class="cream_box menu-item">
+                                <div class="cream_img"><img src="new_images/ultra.png" alt="Ultramilk Cokelat"></div>
+                                <div class="item-details">
+                                    <h6 class="strawberry_text">Ultramilk Cokelat</h6>
+                                    <div class="d-flex flex-column align-items-end mt-3 px-2">
+                                        <div class="price-text mb-2">
+                                            <span class="text-muted small">Price:</span>
+                                            <span class="d-block fs-4 fw-bold text-primary">7.000</span>
+                                        </div>
+                                        <div class="cart_bt">
+                                            <a href="#" class="add-to-cart" data-name="Ultramilk Cokelat" data-price="7.000">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Beverage Item 4 -->
+                        <div class="col-md-4 col-sm-6 menu-item-col">
+                            <div class="cream_box menu-item">
+                                <div class="cream_img"><img src="new_images/soya.png" alt="Soya"></div>
+                                <div class="item-details">
+                                    <h6 class="strawberry_text">Soya</h6>
+                                    <div class="d-flex flex-column align-items-end mt-3 px-2">
+                                        <div class="price-text mb-2">
+                                            <span class="text-muted small">Price:</span>
+                                            <span class="d-block fs-4 fw-bold text-primary">8.000</span>
+                                        </div>
+                                        <div class="cart_bt">
+                                            <a href="#" class="add-to-cart" data-name="Soya" data-price="8.000">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Beverage Item 5 -->
+                        <div class="col-md-4 col-sm-6 menu-item-col">
+                            <div class="cream_box menu-item">
+                                <div class="cream_img"><img src="new_images/nutri.png" alt="Nutrisari"></div>
+                                <div class="item-details">
+                                    <h6 class="strawberry_text">Nutrisari</h6>
+                                    <div class="d-flex flex-column align-items-end mt-3 px-2">
+                                        <div class="price-text mb-2">
+                                            <span class="text-muted small">Price:</span>
+                                            <span class="d-block fs-4 fw-bold text-primary">5.000</span>
+                                        </div>
+                                        <div class="cart_bt">
+                                            <a href="#" class="add-to-cart" data-name="Nutrisari" data-price="5.000">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Copyright Section -->
+    <div class="copyright_section margin_top90">
+        <div class="container">
+            <p class="copyright_text">Copyright &copy; 2025 All Rights Reserved. Designed by GACOR Group | Distribution by U-Kitchen</p>
+        </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/jquery-3.0.0.min.js"></script>
+    <script src="js/plugin.js"></script>
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/custom.js"></script>
+
+    <script>
+        let cart = [];
+        let sidebarOpen = false;
+
+        // Function to update cart count display
+        function updateCartCount() {
+            document.getElementById('cart-count').innerText = cart.length;
+        }
+
+        // Function to show the cart content using SweetAlert2
+        function showCart() {
+            if (cart.length === 0) {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Keranjang Anda Kosong',
+                    text: 'Silakan tambahkan item ke keranjang terlebih dahulu.',
+                    confirmButtonText: 'Oke',
+                    customClass: {
+                        popup: 'swal2-info-custom'
+                    }
+                });
+                return;
+            }
+
+            // Group items by name and calculate total quantity and price
+            const groupedCart = {};
+            cart.forEach(item => {
+                const key = item.name;
+                if (!groupedCart[key]) {
+                    groupedCart[key] = { ...item, qty: 1 };
+                } else {
+                    groupedCart[key].qty += 1;
+                }
+            });
+
+            let cartHtml = '<div class="cart-list-container">';
+            let total = 0;
+
+            Object.keys(groupedCart).forEach((name) => {
+                const item = groupedCart[name];
+                const itemTotal = item.qty * item.price;
+                total += itemTotal;
+
+                cartHtml += `
+                    <div class="d-flex justify-content-between align-items-center py-2 border-bottom cart-item-row">
+                        <div class="item-info">
+                            <strong class="item-name">${item.name}</strong><br>
+                            <small class="text-muted item-price-qty">$${item.price.toFixed(3)} × ${item.qty}</small>
+                        </div>
+                        <div class="item-controls d-flex align-items-center">
+                            <button class="btn btn-sm btn-outline-secondary me-2" onclick="decreaseQty('${name}')">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <span class="badge bg-primary px-2 qty-badge">${item.qty}</span>
+                            <button class="btn btn-sm btn-outline-secondary ms-2" onclick="increaseQty('${name}', ${item.price})">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                        <div class="item-total">
+                            <strong>$${itemTotal.toFixed(3)}</strong>
+                        </div>
+                    </div>`;
+            });
+
+            cartHtml += `</div>`; // Close cart-list-container
+            cartHtml += `<div class="mt-3 pt-3 border-top text-end">
+                            <h5>Total: <strong class="text-primary">$${total.toFixed(2)}</strong></h5>
+                         </div>`;
+
+            // Table Number Input
+            cartHtml += `
+                <div class="form-group mt-3">
+                    <label for="tableNumber" class="form-label">Nomor Meja</label>
+                    <input type="text" id="tableNumber" class="form-control" placeholder="Masukkan nomor meja Anda">
+                </div>`;
+
+            // Payment Method Selection
+            cartHtml += `
+                <div class="form-group mt-3">
+                    <label class="form-label">Metode Pembayaran</label><br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="payCash" value="Cash" checked>
+                        <label class="form-check-label" for="payCash">Cash</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="payQRIS" value="QRIS">
+                        <label class="form-check-label" for="payQRIS">QRIS</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="payTransfer" value="Transfer">
+                        <label class="form-check-label" for="payTransfer">Transfer</label>
+                    </div>
+                </div>`;
+
+            // Pay Now Button
+            cartHtml += `<button class="btn btn-success btn-lg w-100 mt-4" onclick="handlePayment()">Bayar Sekarang</button>`;
+
+            Swal.fire({
+                title: 'Pesanan Anda',
+                html: cartHtml,
+                showCloseButton: true,
+                showConfirmButton: false,
+                width: '750px', // Increased width for better layout
+                customClass: {
+                    container: 'swal2-container-custom',
+                    popup: 'swal2-popup-custom',
+                    title: 'swal2-title-custom',
+                    htmlContainer: 'swal2-html-container-custom'
+                },
+                didOpen: () => {
+                    document.getElementById("tableNumber").focus();
+                }
+            });
+        }
+
+        // Increase item quantity in cart
+        function increaseQty(name, price) {
+            cart.push({ name, price });
+            updateCartCount();
+            showCart(); // Re-render cart to show updated quantities
+        }
+
+        // Decrease item quantity in cart
+        function decreaseQty(name) {
+            const index = cart.findIndex(item => item.name === name);
+            if (index !== -1) {
+                cart.splice(index, 1);
+                updateCartCount();
+                showCart(); // Re-render cart to show updated quantities
+            }
+        }
+
+        // Handle adding item to cart
+        function handleAddToCart(e) {
+            e.preventDefault();
+            const name = this.dataset.name;
+            const price = parseFloat(this.dataset.price);
+
+            cart.push({ name, price });
+            updateCartCount();
+
+            // Visual feedback on button
+            const originalHTML = this.innerHTML;
+            this.innerHTML = '<i class="fa fa-check-circle me-2"></i>Added to Cart!';
+            this.classList.remove('btn-success');
+            this.classList.add('btn-primary', 'disabled');
+            this.disabled = true; // Disable to prevent multiple clicks
+
+            setTimeout(() => {
+                this.innerHTML = originalHTML;
+                this.classList.remove('btn-primary');
+                this.classList.add('btn-success');
+                this.disabled = false;
+            }, 1500);
+
+            Swal.fire({
+                icon: 'success',
+                title: `${name} ditambahkan ke keranjang!`,
+                showConfirmButton: false,
+                timer: 1200,
+                toast: true,
+                position: 'top-end',
+                customClass: {
+                    popup: 'swal2-toast-custom'
+                }
+            });
+        }
+
+        // Initialize add to cart listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Attach event listeners to all "Add To Cart" buttons
+            document.querySelectorAll('.add-to-cart').forEach(btn => {
+                btn.addEventListener('click', handleAddToCart);
+            });
+
+            // Clear search function for main search bar
+            window.clearSearch = function() {
+                document.getElementById('searchInput').value = '';
+                filterMenu();
+                // Manually trigger the display update for the clear button
+                const searchInput = document.getElementById('searchInput');
+                const clearButton = searchInput.nextElementSibling; // Assuming the button is the next sibling
+                if (clearButton && clearButton.classList.contains('btn-outline-secondary')) {
+                    clearButton.style.display = 'none';
+                }
+            }
+            // Sidebar search functions
+            window.filterMenuFromSidebar = function() {
+                const query = document.getElementById('sidebarSearch').value;
+                document.getElementById('searchInput').value = query; // Sync with main search
+                filterMenu();
+            }
+
+            window.clearSidebarSearch = function() {
+                document.getElementById('sidebarSearch').value = '';
+                document.getElementById('searchInput').value = ''; // Sync with main search
+                filterMenu();
+            }
+        });
+
+        // Filter menu items based on search query
+        function filterMenu() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const menuItems = document.querySelectorAll('.menu-item-col'); // Target the column containing the item
+
+             menuItems.forEach(col => {
+                const itemName = col.querySelector('.strawberry_text').textContent.toLowerCase();
+                if (itemName.includes(query)) {
+                    col.style.display = 'block';
+                } else {
+                    col.style.display = 'none';
+                }
+            });
+            updateSectionVisibility();
+        // Show/hide clear button based on input content
+            const searchInput = document.getElementById('searchInput');
+            const clearButton = searchInput.nextElementSibling; // Assuming the button is the next sibling
+            if (clearButton && clearButton.classList.contains('btn-outline-secondary')) {
+                if (query.length > 0) {
+                    clearButton.style.display = 'block';
+                } else {
+                    clearButton.style.display = 'none';
+                }
+            }
+        }
+
+        // Show/hide section headers based on visible items
+        function updateSectionVisibility() {
+            const foodSection = document.getElementById('kategori-makanan').closest('.cream_section');
+            const foodItemsContainer = foodSection.querySelector('#food-items-container');
+            const visibleFoodItems = Array.from(foodItemsContainer.querySelectorAll('.menu-item-col')).filter(item =>
+                window.getComputedStyle(item).display !== 'none'
+            );
+            foodSection.querySelector('.row').querySelector('.col-md-12').style.display = visibleFoodItems.length === 0 ? 'none' : 'block';
+
+            const beverageSection = document.getElementById('kategori-minuman').closest('.cream_section');
+            const beverageItemsContainer = beverageSection.querySelector('#beverage-items-container');
+            const visibleBeverageItems = Array.from(beverageItemsContainer.querySelectorAll('.menu-item-col')).filter(item =>
+                window.getComputedStyle(item).display !== 'none'
+            );
+            beverageSection.querySelector('.row').querySelector('.col-md-12').style.display = visibleBeverageItems.length === 0 ? 'none' : 'block';
+        }
+
+        // Handle payment logic
+        function handlePayment() {
+            const tableNumber = document.getElementById("tableNumber").value;
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+
+            if (!tableNumber.trim()) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Nomor meja wajib diisi!',
+                    text: 'Mohon masukkan nomor meja Anda untuk melanjutkan.',
+                    confirmButtonText: 'Oke',
+                    customClass: {
+                        popup: 'swal2-warning-custom'
+                    }
+                });
+                return;
+            }
+
+            let title = '';
+            let htmlContent = '';
+            let icon = 'success';
+
+            if (paymentMethod === 'Cash') {
+                title = 'Pembayaran Tunai';
+                htmlContent = `
+                    <p class="lead">Nomor Meja: <strong>${tableNumber}</strong></p>
+                    <p>Silakan melakukan pembayaran langsung di kasir. Terima kasih atas pesanan Anda!</p>
+                    <p class="text-muted mt-3">Pesanan Anda akan segera diproses.</p>
+                `;
+            } else if (paymentMethod === 'QRIS') {
+                title = 'Pembayaran QRIS';
+                htmlContent = `
+                    <p class="lead">Nomor Meja: <strong>${tableNumber}</strong></p>
+                    <p>Silakan scan barcode di bawah ini untuk pembayaran:</p>
+                    <div class="text-center my-4">
+                        <img src="images/barcode.png" alt="QRIS Barcode" class="img-fluid qris-barcode">
+                    </div>
+                    <p>Setelah pembayaran berhasil, pesanan Anda akan segera diproses. Terima kasih!</p>
+                `;
+                // Ensure you have 'images/barcode.jpg' or update the path
+            } else if (paymentMethod === 'Transfer') {
+                title = 'Pembayaran Transfer Bank';
+                htmlContent = `
+                    <p class="lead">Nomor Meja: <strong>${tableNumber}</strong></p>
+                    <p>Silakan lakukan transfer ke rekening berikut:</p>
+                    <div class="bank-details my-4 p-3 border rounded bg-light">
+                        <p class="mb-1"><strong>Bank:</strong> BCA</p>
+                        <p class="mb-1"><strong>Nomor Rekening:</strong> 1234567890</p>
+                        <p class="mb-0"><strong>Atas Nama:</strong> U-Kitchen</p>
+                    </div>
+                    <p>Mohon konfirmasi pembayaran setelah transfer. Pesanan Anda akan diproses setelah verifikasi. Terima kasih!</p>
+                `;
+            }
+
+            Swal.fire({
+                icon: icon,
+                title: title,
+                html: htmlContent,
+                confirmButtonText: 'Tutup',
+                customClass: {
+                    container: 'swal2-container-custom',
+                    popup: 'swal2-popup-custom',
+                    title: 'swal2-title-custom',
+                    htmlContainer: 'swal2-html-container-custom'
+                }
+            });
+
+            // Clear cart after successful order
+            cart = [];
+            updateCartCount();
+        }
+
+        // Toggle sidebar visibility
+        function toggleSidebar() {
+            const sidebar = document.getElementById('modernSidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            const content = document.getElementById('mainContent');
+            const toggleBtn = document.getElementById('sidebarToggle');
+
+            if (!sidebarOpen) {
+                sidebar.classList.add('open');
+                overlay.classList.add('active');
+                content.classList.add('shifted');
+                toggleBtn.classList.add('hidden');
+                sidebarOpen = true;
+            } else {
+                closeSidebar();
+            }
+        }
+
+        // Close sidebar
+        function closeSidebar() {
+            const sidebar = document.getElementById('modernSidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            const content = document.getElementById('mainContent');
+            const toggleBtn = document.getElementById('sidebarToggle');
+
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            content.classList.remove('shifted');
+            toggleBtn.classList.remove('hidden');
+            sidebarOpen = false;
+        }
+
+        // Scroll to a specific section
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+                closeSidebar();
+            }
+        }
+
+        // Event listeners for sidebar
+        document.getElementById('sidebarOverlay').addEventListener('click', closeSidebar);
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && sidebarOpen) {
+                closeSidebar();
+            }
+        });
+
+        // Initial update of cart count on page load
+        updateCartCount();
+        // Initial filter to ensure correct section visibility
+        filterMenu();    
+    </script>
+</body>
+</html>
